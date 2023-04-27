@@ -1,4 +1,4 @@
-export class ability {
+export class Ability {
 
     id: number = 0; 
     nombreHabilidad: string = "";

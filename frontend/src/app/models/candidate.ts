@@ -1,9 +1,10 @@
-export class candidate {
+export interface Candidate {
         
-    id: number = 0; 
-    nombre: string = "";
-    cargo: string = "";
-    descripcion: string = "";
-    foto: string  ="";
+    id: number; 
+    nombre: string;
+    cargo: string;
+    descripcion: string;
+    foto: string;
 
+    
 }

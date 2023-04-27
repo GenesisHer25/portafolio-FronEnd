@@ -1,11 +1,9 @@
-export class project {
+export interface Project {
 
-    id: number = 0; 
-    nombreProyecto: string = "";
-    fechaCreacion: Date = new Date();
-    descripcion: string = "";
-    link: string = "";
-    idAspirante: number = 0;
-   
-
+    id: number; 
+    nombreProyecto: string;
+    fechaCreacion: Date;
+    descripcion: string;
+    link: string;
+    idAspirante: number;
 }

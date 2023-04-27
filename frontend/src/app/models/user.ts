@@ -1,10 +1,9 @@
-export class user {
+export interface User {
 
-    id: number = 0; 
-    nombre: string = "";
-    username: string = "";
-    password: string = "";
-    idAspirante: number = 0;
-   
-
+    id: number; 
+    nombre: string;
+    username: string;
+    password: string;
+    idAspirante: number;
+ 
 }

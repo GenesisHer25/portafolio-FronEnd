@@ -1,2 +1,51 @@
-<p>candidate works!</p>
+<div class="candidate card background-image">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-picture">
+          <img *ngIf="!editarSave" [src]="candidate.foto ? candidate.foto : imageSrc" alt="Foto del candidato">
+          <div *ngIf="editarSave" class="image-upload">
+            <label for="imageInput">
+              <img [src]="imageSrc" alt="Foto del candidato">
+            </label>
+            <input id="imageInput" type="file" (change)="cargarImagen($event)">
+          </div>
+        </div>
+      </div>
 
+      <div class="col-md-9">
+         <button class="btn btn-primary" *ngIf="editar" (click)="editCandidate()">Editar</button>
+        <button class="btn btn-success" *ngIf="editarSave" (click)="saveCandidate()">Guardar</button>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+             <h2 *ngIf="!editarSave" class="text-color-candidate">{{ candidate.nombre }}</h2>
+            <input *ngIf="editarSave" type="text" [(ngModel)]="candidate.nombre" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+             <h2 *ngIf="!editarSave"  class="text-color-candidate">{{ candidate.cargo }}</h2>
+            <input *ngIf="editarSave" type="text" [(ngModel)]="candidate.cargo" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+<div class="row">
+  <div class="col-md-12 mb-3">
+    <label class="fw-bold text-primary">Acerca de mi:</label>
+    <h4 *ngIf="!editarSave">{{ candidate.descripcion }}</h4>
+    <textarea *ngIf="editarSave" [(ngModel)]="candidate.descripcion" class="form-control"></textarea>
+  </div>
+</div>
+<app-experience  [editar]="editar">
+</app-experience>
+<br>
+<app-education [editar]="editar">
+</app-education>
+<br>
+<app-ability [editar]="editar">
+</app-ability>
+<br>
+<app-project   [editar]="editar">
+</app-project>

@@ -1,1 +1,33 @@
-<p>project works!</p>
+<!-- src/app/project/project.component.html -->
+<div class="project card">
+  <div class="card-body">
+    <h2 class="card-title mb-4">Proyectos</h2>
+    <!-- Aquí va el contenido del componente project -->
+    <button class="btn btn-primary mb-4" *ngIf="editar" (click)="editarSave = true">Editar</button>
+    <button class="btn btn-primary mb-4" *ngIf="editarSave" (click)="saveProjects()">Guardar</button>
+    <button class="btn btn-success mb-4" *ngIf="editarSave" (click)="addProject()">Agregar</button>
+    <div *ngFor="let project of projects; let i = index;">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Nombre del Proyecto:</label>
+          <span *ngIf="!editarSave">{{ project.nombreProyecto }}</span>
+          <input *ngIf="editarSave" type="text" [(ngModel)]="projects[i].nombreProyecto" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Descripción:</label>
+          <span *ngIf="!editarSave">{{ project.descripcion }}</span>
+          <input *ngIf="editarSave" type="text" [(ngModel)]="projects[i].descripcion" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Link:</label>
+          <span *ngIf="!editarSave">{{ project.link }}</span>
+          <input *ngIf="editarSave" type="text" [(ngModel)]="projects[i].link" class="form-control">
+        </div>
+        <div *ngIf="editarSave" class="col-md-12 text-end">
+          <button class="btn btn-danger" (click)="removeProject(i, project.id)">Eliminar</button>
+        </div>
+      </div>
+      <hr *ngIf="i < projects.length - 1">
+    </div>
+  </div>
+</div>

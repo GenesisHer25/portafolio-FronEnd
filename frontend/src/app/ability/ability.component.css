@@ -1,0 +1,10 @@
+/* ability.component.css */
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  #divChart{
+    display: block;
+    width: 400px;
+    height: 400px;
+}

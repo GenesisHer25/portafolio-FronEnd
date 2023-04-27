@@ -1,1 +1,54 @@
-<p>ability works!</p>
+<!-- ability.component.html -->
+
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Habilidades</h2>
+    <button *ngIf="editar" class="btn btn-primary" (click)="editAbilities()">Editar</button>
+    <button *ngIf="editing" class="btn btn-success" (click)="saveAbilities()">Guardar</button>
+    <button *ngIf="editing" class="btn btn-success" (click)="addAbility()">Agregar</button>
+
+    <div *ngFor="let ability of abilities; let i = index">
+      <div class="row">
+        <div class="col-md-4">
+          <label  *ngIf="!editing" class="fw-bold text-primary">{{ ability.nombreHabilidad }}</label>
+        </div>
+        <div  class="col-md-8">
+          <div *ngIf="!editing" class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [style.width]="ability.porcentaje + '%'"
+              [attr.aria-valuenow]="ability.porcentaje"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            > {{ability.porcentaje }}</div>
+          </div>
+          <label *ngIf="editing"  class="fw-bold text-primary">Nombre habilidad</label>
+          <input
+            *ngIf="editing"
+            type="text"
+            [(ngModel)]="ability.nombreHabilidad"
+            class="form-control"
+          />
+          <label   *ngIf="editing" class="fw-bold text-primary">porcentaje</label>
+          <input
+          *ngIf="editing"
+          type="number"
+          min="0"
+          max="100"
+          [(ngModel)]="ability.porcentaje"
+          class="form-control"
+        />
+        <div *ngIf="editing" class="col-md-12 text-end">
+          <button
+            class="btn btn-danger"
+            (click)="eliminarAbility(i, ability.id)"
+          >
+            Eliminar
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

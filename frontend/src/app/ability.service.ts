@@ -1,38 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ability } from './models/ability';
-import {HttpClient } from "@angular/common/http"
-import {environment} from 'src/environments/enviroment'
+import { environment } from 'src/environments/enviroment';
+import { Ability } from './models/ability';
+import { Observable } from 'rxjs';  
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AbilityService {
+  private API_URL = `${environment.API_BASE}/habilidad`;
 
-  private API_URL = `${environment.API_BASE}/habilidad`
+  constructor(private httpClient: HttpClient) { }
 
-    constructor(
-        private _httpClient: HttpClient
-    ) { }
-
-    async get(id:number){
-      this._httpClient.get<ability>(`${this.API_URL}/get?id=${id}`).toPromise();
-    }
-
-    async post(ability:ability){
-      return this._httpClient.post(`${this.API_URL}/crear`,ability).toPromise();
-    }
-    
-    async put(ability:ability){
-      return this._httpClient.put(`${this.API_URL}/editar`,ability).toPromise();
-    }
-     
-    async delete(id:number){
-      return this._httpClient.delete(`${this.API_URL}/borrar?id=${id}`).toPromise();
-    }
-    
-    async getAll() {
-      return this._httpClient.get<ability[]>(`${this.API_URL}/todos`).toPromise();
-    } 
-  
+  async get(id:number):Promise<Observable<Ability[]>>  {
+    const url =  `${this.API_URL}/${id}`;
+    return this.httpClient.get<Ability[]>(url);
+ 
   }
+
+  saveAll(abilities: Ability[]) {
+    const url =  `${this.API_URL}/editarlista`;
+    return this.httpClient.post(url, abilities);
+  }
+  async delete(id: number): Promise<Observable<Object>> {
+    const url = `${this.API_URL}/borrar/${id}`;
+    return this.httpClient.delete(url);
+  }
+}

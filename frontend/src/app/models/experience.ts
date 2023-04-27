@@ -1,12 +1,12 @@
-export class experience {
+export interface Experience {
 
-    id: number = 0; 
-    cargo: string = "";
-    descCargo: string = "";
-    nombreEmpresa: string = "";
-    logoEmpresa: string = "";
-    fechaInicio: Date = new Date();
-    fechaFin: Date = new Date();
-    idAspirante: number = 0; 
+    id: number ; 
+    cargo: string ;
+    descCargo: string ;
+    nombreEmpresa: string ;
+    logoEmpresa: string ;
+    fechaInicio: Date;
+    fechaFin: Date;
+    idAspirante: number; 
 
 }

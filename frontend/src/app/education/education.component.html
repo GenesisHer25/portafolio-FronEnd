@@ -1,1 +1,91 @@
-<p>education works!</p>
+<!-- education.component.html -->
+<div class="education card">
+  <div class="card-body">
+    <h2 class="card-title mb-4">Educación</h2>
+    <button
+      class="btn btn-primary mb-4"
+      *ngIf="editar"
+      (click)="editarSave = true"
+    >
+      {{ 'Editar' }}
+    </button>
+    <button
+      class="btn btn-primary mb-4"
+      *ngIf="editarSave"
+      (click)="saveEducation()"
+    >
+      {{ 'Guardar' }}
+    </button>
+    <button
+      class="btn btn-success mb-4"
+      *ngIf="editarSave"
+      (click)="agregarEducacion()"
+    >
+      Agregar
+    </button>
+
+    <div *ngFor="let edu of education; let i = index">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Institución:</label>
+          <span *ngIf="!editarSave">{{ edu.nombreInstituto }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="education[i].nombreInstituto"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Título:</label>
+          <span *ngIf="!editarSave">{{ edu.tituloEstudiado }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="education[i].tituloEstudiado"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Tipo de educación:</label>
+          <span *ngIf="!editarSave">{{ edu.tipoEducacion }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="education[i].tipoEducacion"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Fecha de inicio:</label>
+          <span *ngIf="!editarSave">{{ edu.fechaInicio | date }}</span>
+          <input
+            *ngIf="editarSave"
+            type="date"
+            [(ngModel)]="education[i].fechaInicio"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Fecha de finalización:</label>
+          <span *ngIf="!editarSave">{{ edu.fechaFin | date }}</span>
+          <input
+            *ngIf="editarSave"
+            type="date"
+            [(ngModel)]="education[i].fechaFin"
+            class="form-control"
+          />
+        </div>
+        <div *ngIf="editarSave" class="col-md-12 text-end">
+          <button
+            class="btn btn-danger"
+            (click)="eliminarEducacion(i, edu.id)"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+      <hr *ngIf="i < education.length - 1" />
+    </div>
+  </div>
+</div>

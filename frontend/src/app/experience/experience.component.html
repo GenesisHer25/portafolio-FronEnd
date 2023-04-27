@@ -1,1 +1,91 @@
-<p>experience works!</p>
+<!-- experience.component.html -->
+<div class="experience card">
+  <div class="card-body">
+    <h2 class="card-title mb-4">Experiencia laboral</h2>
+    <button
+      class="btn btn-primary mb-4"
+      *ngIf="editar"
+      (click)="editarSave = true"
+    >
+      {{ 'Editar' }}
+    </button>
+    <button
+      class="btn btn-primary mb-4"
+      *ngIf="editarSave"
+      (click)="saveExperience()"
+    >
+      {{ 'Guardar' }}
+    </button>
+    <button
+      class="btn btn-success mb-4"
+      *ngIf="editarSave"
+      (click)="agregarExperience()"
+    >
+      Agregar
+    </button>
+
+    <div *ngFor="let exp of experience; let i = index">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Compañía:</label>
+          <span *ngIf="!editarSave">{{ exp.nombreEmpresa }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="experience[i].nombreEmpresa"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Cargo:</label>
+          <span *ngIf="!editarSave">{{ exp.cargo }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="experience[i].cargo"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Descripción del cargo:</label>
+          <span *ngIf="!editarSave">{{ exp.descCargo }}</span>
+          <input
+            *ngIf="editarSave"
+            type="text"
+            [(ngModel)]="experience[i].descCargo"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Fecha de inicio:</label>
+          <span *ngIf="!editarSave">{{ exp.fechaInicio | date }}</span>
+          <input
+            *ngIf="editarSave"
+            type="date"
+            [(ngModel)]="experience[i].fechaInicio"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="fw-bold text-primary">Fecha de finalización:</label>
+          <span *ngIf="!editarSave">{{ exp.fechaFin | date }}</span>
+          <input
+            *ngIf="editarSave"
+            type="date"
+            [(ngModel)]="experience[i].fechaFin"
+            class="form-control"
+          />
+        </div>
+        <div *ngIf="editarSave" class="col-md-12 text-end">
+          <button
+            class="btn btn-danger"
+            (click)="eliminarExperience(i, exp.id)"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+      <hr *ngIf="i < experience.length - 1" />
+    </div>
+  </div>
+</div>
